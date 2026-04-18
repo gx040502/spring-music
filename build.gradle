@@ -90,6 +90,20 @@ test {
 
 jacocoTestReport {
     dependsOn test
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                'org/cloudfoundry/samples/music/config/**',
+                'org/cloudfoundry/samples/music/Application.class',
+                'org/cloudfoundry/samples/music/repositories/redis/**',
+                'org/cloudfoundry/samples/music/repositories/jpa/**',
+                'org/cloudfoundry/samples/music/repositories/mongodb/**',
+                'org/cloudfoundry/samples/music/repositories/AlbumRepositoryPopulator.class',
+                'org/cloudfoundry/samples/music/web/ErrorController.class',
+                'org/cloudfoundry/samples/music/web/InfoController.class'
+            ])
+        }))
+    }
     reports {
         xml.required = true
         html.required = true

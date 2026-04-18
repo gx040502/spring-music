@@ -8,7 +8,7 @@ WORKDIR /app
 COPY build/libs/spring-music-1.0.jar app.jar
 
 # Expose port 8080, which is the default port the Spring Boot app runs on
-EXPOSE 8082
+EXPOSE 8085
 
 # Define the command to run the application when the container starts
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar", "--server.port=8085"]

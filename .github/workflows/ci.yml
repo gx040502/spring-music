@@ -55,7 +55,7 @@ jobs:
       
     - name: Run and Verify Docker Container
       run: |
-        docker run -d -p 8080:8080 --name spring-music-container spring-music-app:latest
+        docker run -d -p 8085:8085 --name spring-music-container spring-music-app:latest
         sleep 10
         # Verify the container is actually running
         docker ps | grep spring-music-container
