@@ -4,6 +4,11 @@ plugins {
     id 'java'
     id 'eclipse-wtp'
     id 'idea'
+    id 'jacoco'
+}
+
+jacoco {
+    toolVersion = "0.8.11"
 }
 
 group = 'org.cloudfoundry.samples.music'
@@ -74,4 +79,19 @@ jar {
 
 tasks.named("bootBuildImage") {
     builder = "paketobuildpacks/builder-jammy-base:latest"
+}
+
+test {
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+    }
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = true
+    }
 }
